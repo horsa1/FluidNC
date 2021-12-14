@@ -10,6 +10,7 @@
 
 #include <cstring>
 #include <cstdint>
+#include <cmath>
 
 const int MAX_INT_DIGITS = 8;  // Maximum number of digits in int32 (and float)
 
@@ -91,6 +92,10 @@ bool read_float(const char* line, size_t* char_counter, float* float_ptr) {
     }
     *char_counter = ptr - line - 1;  // Set char_counter to next statement
     return true;
+}
+
+void IRAM_ATTR delay_us(int32_t us) {
+    spinUntil(usToEndTicks(us));
 }
 
 void delay_ms(uint16_t ms) {

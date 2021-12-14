@@ -27,7 +27,8 @@ protected:
     const char* _name;
     char        _line[maxLine];
     size_t      _linelen;
-    bool        _addCR = false;
+    bool        _addCR     = false;
+    char        _lastWasCR = false;
 
 public:
     Channel(const char* name, bool addCR = false) : _name(name), _linelen(0), _addCR(addCR) {}
@@ -37,4 +38,5 @@ public:
     virtual Channel* pollLine(char* line);
     virtual void     ack(Error status);
     const char*      name() { return _name; }
+    virtual int      rx_buffer_available() = 0;
 };
